@@ -16,6 +16,7 @@ export const CurrentRow = ({ guess, className }: Props) => {
       {splitGuess.map((letter, i) => (
         <Cell key={i} value={letter} />
       ))}
+      <div style={{ width: '10px' }}></div>
       {emptyCells.map((_, i) => (
         <Cell key={i} />
       ))}

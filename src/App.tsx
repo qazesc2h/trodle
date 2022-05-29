@@ -274,6 +274,7 @@ function App() {
           solution={solution}
           guesses={guesses}
           isRevealing={isRevealing}
+          isGameOver={isGameWon || isGameLost}
         />
         <InfoModal
           isOpen={isInfoModalOpen}
