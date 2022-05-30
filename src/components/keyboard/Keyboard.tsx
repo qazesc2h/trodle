@@ -1,6 +1,6 @@
 import { getStatuses } from '../../lib/statuses'
 import { Key } from './Key'
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 import { ENTER_TEXT, DELETE_TEXT } from '../../constants/strings'
 import { localeAwareUpperCase } from '../../lib/words'
 import arrayShuffle from 'array-shuffle'
@@ -25,42 +25,46 @@ export const Keyboard = ({
   isGameOver,
 }: Props) => {
   const charStatuses = getStatuses(solution, guesses)
-  const keyLayout = [
+  const keyLayout = useMemo(() => {}, [
     [
-      ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
-      ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'],
-      ['Z', 'X', 'C', 'V', 'B', 'N', 'M'],
+      [
+        ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
+        ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'],
+        ['Z', 'X', 'C', 'V', 'B', 'N', 'M'],
+      ],
+      [
+        ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'],
+        ['K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S'],
+        ['T', 'U', 'V', 'W', 'X', 'Y', 'Z'],
+      ],
+      (() => {
+        const randomLayout = arrayShuffle(
+          'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
+        )
+        return [
+          randomLayout.slice(0, 10),
+          randomLayout.slice(10, 19),
+          randomLayout.slice(19),
+        ]
+      })(),
+      [
+        ['Q', 'W', 'F', 'P', 'G', 'J', 'L', 'U', 'Y'],
+        ['A', 'R', 'S', 'T', 'D', 'H', 'N', 'E', 'I', 'O'],
+        ['Z', 'X', 'C', 'V', 'B', 'K', 'M'],
+      ],
+      [[], [], 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')],
+      [
+        ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
+        ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'],
+        ['Z', 'X', 'C', 'V', 'B', 'N', 'M'],
+      ],
+      [
+        ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
+        ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'],
+        ['Z', 'X', 'C', 'V', 'B', 'N', 'M'],
+      ],
     ],
-    [
-      ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'],
-      ['K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S'],
-      ['T', 'U', 'V', 'W', 'X', 'Y', 'Z'],
-    ],
-    (() => {
-      const randomLayout = arrayShuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''))
-      return [
-        randomLayout.slice(0, 10),
-        randomLayout.slice(10, 19),
-        randomLayout.slice(19),
-      ]
-    })(),
-    [
-      ['Q', 'W', 'F', 'P', 'G', 'J', 'L', 'U', 'Y'],
-      ['A', 'R', 'S', 'T', 'D', 'H', 'N', 'E', 'I', 'O'],
-      ['Z', 'X', 'C', 'V', 'B', 'K', 'M'],
-    ],
-    [[], [], 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')],
-    [
-      ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
-      ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'],
-      ['Z', 'X', 'C', 'V', 'B', 'N', 'M'],
-    ],
-    [
-      ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
-      ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'],
-      ['Z', 'X', 'C', 'V', 'B', 'N', 'M'],
-    ],
-  ]
+  ])
 
   const onClick = (value: string) => {
     if (value === 'ENTER') {
