@@ -192,6 +192,13 @@ function App() {
       return
     }
 
+    if (currentGuess === 'TROLL') {
+      setCurrentRowClass('jiggle')
+      return showErrorAlert('https://youtu.be/dQw4w9WgXcQ', {
+        onClose: clearCurrentRowClass,
+      })
+    }
+
     if (!(unicodeLength(currentGuess) === solution.length)) {
       setCurrentRowClass('jiggle')
       return showErrorAlert(NOT_ENOUGH_LETTERS_MESSAGE, {
@@ -266,6 +273,11 @@ function App() {
             isRevealing={isRevealing}
             currentRowClassName={currentRowClass}
           />
+        </div>
+        <div className="h-14">
+          {/* <Countdown
+            isModalOpen={isInfoModalOpen || isStatsModalOpen || isSettingsModalOpen}
+          /> */}
         </div>
         <Keyboard
           onChar={onChar}

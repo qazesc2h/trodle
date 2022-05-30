@@ -49,6 +49,17 @@ export const Keyboard = ({
       ['A', 'R', 'S', 'T', 'D', 'H', 'N', 'E', 'I', 'O'],
       ['Z', 'X', 'C', 'V', 'B', 'K', 'M'],
     ],
+    [[], [], 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')],
+    [
+      ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
+      ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'],
+      ['Z', 'X', 'C', 'V', 'B', 'N', 'M'],
+    ],
+    [
+      ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
+      ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'],
+      ['Z', 'X', 'C', 'V', 'B', 'N', 'M'],
+    ],
   ]
 
   const onClick = (value: string) => {
@@ -70,7 +81,9 @@ export const Keyboard = ({
       } else {
         const key = localeAwareUpperCase(e.key)
         // TODO: check this test if the range works with non-english letters
-        if (key.length === 1 && key >= 'A' && key <= 'Z') {
+        if (guesses.length === 4) {
+          onChar(key)
+        } else if (key.length === 1 && key >= 'A' && key <= 'Z') {
           // onChar(key)
           const idx = 'QWERTYUIOPASDFGHJKLZXCVBNM'
             .split('')
@@ -94,29 +107,31 @@ export const Keyboard = ({
   return (
     <div>
       <div className="flex justify-center mb-1">
-        {['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'].map((key) => (
+        {keyLayout[guesses.length][0].map((key) => (
           <Key
             value={key}
             key={key}
             onClick={onClick}
             status={charStatuses[key]}
             isRevealing={isRevealing}
+            isTransparent={guesses.length === 5 && !isGameOver}
           />
         ))}
       </div>
       <div className="flex justify-center mb-1">
-        {['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'].map((key) => (
+        {keyLayout[guesses.length][1].map((key) => (
           <Key
             value={key}
             key={key}
             onClick={onClick}
             status={charStatuses[key]}
             isRevealing={isRevealing}
+            isTransparent={guesses.length === 5 && !isGameOver}
           />
         ))}
       </div>
       <div className="flex justify-center">
-        {guesses.length % 2 == 0 || isGameOver ? (
+        {guesses.length % 2 === 0 || isGameOver ? (
           <Key width={65.4} value="ENTER" onClick={onClick}>
             {ENTER_TEXT}
           </Key>
@@ -125,16 +140,17 @@ export const Keyboard = ({
             {DELETE_TEXT}
           </Key>
         )}
-        {['Z', 'X', 'C', 'V', 'B', 'N', 'M'].map((key) => (
+        {keyLayout[guesses.length][2].map((key) => (
           <Key
             value={key}
             key={key}
             onClick={onClick}
             status={charStatuses[key]}
             isRevealing={isRevealing}
+            isTransparent={guesses.length === 5 && !isGameOver}
           />
         ))}
-        {guesses.length % 2 == 0 || isGameOver ? (
+        {guesses.length % 2 === 0 || isGameOver ? (
           <Key width={65.4} value="DELETE" onClick={onClick}>
             {DELETE_TEXT}
           </Key>

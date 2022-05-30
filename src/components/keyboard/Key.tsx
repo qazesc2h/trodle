@@ -12,6 +12,7 @@ type Props = {
   status?: CharStatus
   onClick: (value: string) => void
   isRevealing?: boolean
+  isTransparent?: boolean
 }
 
 export const Key = ({
@@ -21,6 +22,7 @@ export const Key = ({
   value,
   onClick,
   isRevealing,
+  isTransparent,
 }: Props) => {
   const keyDelayMs = REVEAL_TIME_MS * solution.length
   const isHighContrast = getStoredIsHighContrastMode()
@@ -40,6 +42,7 @@ export const Key = ({
         status === 'correct' && !isHighContrast,
       'bg-yellow-500 hover:bg-yellow-600 active:bg-yellow-700 text-white':
         status === 'present' && !isHighContrast,
+      'text-black text-opacity-0': isTransparent,
     }
   )
 
