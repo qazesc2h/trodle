@@ -46,7 +46,10 @@ export const Cell = ({
 
   return (
     <div className={classes} style={{ animationDelay: '0.5s' }}>
-      <div className="letter-container" style={{ animationDelay: '0.5s' }}>
+      <div
+        className="letter-container"
+        style={{ animationDelay: animationDelay }}
+      >
         {value}
       </div>
     </div>
