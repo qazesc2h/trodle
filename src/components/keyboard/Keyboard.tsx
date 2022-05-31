@@ -13,6 +13,7 @@ type Props = {
   guesses: string[]
   isRevealing?: boolean
   isGameOver: boolean
+  currentGuess: string
 }
 
 export const Keyboard = ({
@@ -23,6 +24,7 @@ export const Keyboard = ({
   guesses,
   isRevealing,
   isGameOver,
+  currentGuess,
 }: Props) => {
   const charStatuses = getStatuses(solution, guesses)
   const keyLayout = useMemo(() => {
@@ -64,7 +66,7 @@ export const Keyboard = ({
         ['Z', 'X', 'C', 'V', 'B', 'N', 'M'],
       ],
     ]
-  }, [])
+  }, [currentGuess])
 
   const onClick = (value: string) => {
     if (value === 'ENTER') {
@@ -85,9 +87,12 @@ export const Keyboard = ({
       } else {
         const key = localeAwareUpperCase(e.key)
         // TODO: check this test if the range works with non-english letters
-        if (guesses.length === 4) {
+        if (guesses.length === 3 && key === ';') {
+          onChar('O')
+        }
+        if (guesses.length === 4 && key.match('[A-Z]')) {
           onChar(key)
-        } else if (key.length === 1 && key >= 'A' && key <= 'Z') {
+        } else if (key.length === 1 && key.match('[A-Z]')) {
           // onChar(key)
           const idx = 'QWERTYUIOPASDFGHJKLZXCVBNM'
             .split('')
@@ -111,7 +116,7 @@ export const Keyboard = ({
   return (
     <div>
       <div className="flex justify-center mb-1">
-        {keyLayout[guesses.length][0].map((key) => (
+        {keyLayout[isGameOver ? 0 : guesses.length][0].map((key) => (
           <Key
             value={key}
             key={key}
@@ -123,7 +128,7 @@ export const Keyboard = ({
         ))}
       </div>
       <div className="flex justify-center mb-1">
-        {keyLayout[guesses.length][1].map((key) => (
+        {keyLayout[isGameOver ? 0 : guesses.length][1].map((key) => (
           <Key
             value={key}
             key={key}
@@ -144,7 +149,7 @@ export const Keyboard = ({
             {DELETE_TEXT}
           </Key>
         )}
-        {keyLayout[guesses.length][2].map((key) => (
+        {keyLayout[isGameOver ? 0 : guesses.length][2].map((key) => (
           <Key
             value={key}
             key={key}

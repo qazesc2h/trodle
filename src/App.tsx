@@ -1,3 +1,4 @@
+import Countdown from 'react-countdown'
 import { useState, useEffect } from 'react'
 import { Grid } from './components/grid/Grid'
 import { Keyboard } from './components/keyboard/Keyboard'
@@ -40,6 +41,8 @@ import { AlertContainer } from './components/alerts/AlertContainer'
 import { useAlert } from './context/AlertContext'
 import { Navbar } from './components/navbar/Navbar'
 import { isInAppBrowser } from './lib/browser'
+import { start } from 'repl'
+import AnimatedBg from 'react-animated-bg'
 
 function App() {
   const prefersDarkMode = window.matchMedia(
@@ -91,6 +94,8 @@ function App() {
       ? localStorage.getItem('gameMode') === 'hard'
       : false
   )
+
+  const [now, setNow] = useState(Date.now())
 
   useEffect(() => {
     // if no game state on load,
@@ -258,14 +263,24 @@ function App() {
   }
 
   return (
-    <div className="h-screen flex flex-col">
+    <AnimatedBg
+      className="h-screen flex flex-col"
+      colors={
+        isDarkMode
+          ? ['#371B58', '#4C3575', '#5B4B8A', '#7858A6']
+          : ['#FEF9A7', '#FAC213', '#F77E21', '#D61C4E']
+      }
+      duration={2}
+      timingFunction="ease-in-out"
+      randomMode
+    >
       <Navbar
         setIsInfoModalOpen={setIsInfoModalOpen}
         setIsStatsModalOpen={setIsStatsModalOpen}
         setIsSettingsModalOpen={setIsSettingsModalOpen}
       />
       <div className="pt-2 px-1 pb-8 md:max-w-7xl w-full mx-auto sm:px-6 lg:px-8 flex flex-col grow">
-        <div className="pb-6 grow">
+        <div className="pb-4 grow">
           <Grid
             solution={solution}
             guesses={guesses}
@@ -274,11 +289,23 @@ function App() {
             currentRowClassName={currentRowClass}
           />
         </div>
-        <div className="h-14">
-          {/* <Countdown
-            isModalOpen={isInfoModalOpen || isStatsModalOpen || isSettingsModalOpen}
-          /> */}
-        </div>
+        <Countdown
+          date={now + 15000}
+          intervalDelay={0}
+          precision={3}
+          daysInHours={true}
+          overtime={true}
+          renderer={(props) => (
+            <div className="pb-4 grow w-full flex flex-col text-center text-xl text-slate-800 dark:text-slate-300 font-bold">
+              00:{props.seconds.toString().padStart(2, '0')}.
+              {props.milliseconds.toString().padStart(3, '0')}
+            </div>
+          )}
+          autoStart={true}
+          onComplete={() => {
+            setNow(Date.now())
+          }}
+        />
         <Keyboard
           onChar={onChar}
           onDelete={onDelete}
@@ -287,6 +314,7 @@ function App() {
           guesses={guesses}
           isRevealing={isRevealing}
           isGameOver={isGameWon || isGameLost}
+          currentGuess={currentGuess}
         />
         <InfoModal
           isOpen={isInfoModalOpen}
@@ -318,7 +346,7 @@ function App() {
         />
         <AlertContainer />
       </div>
-    </div>
+    </AnimatedBg>
   )
 }
 
