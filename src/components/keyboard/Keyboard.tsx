@@ -28,7 +28,6 @@ export const Keyboard = ({
 }: Props) => {
   const charStatuses = getStatuses(solution, guesses)
   const keyLayout = useMemo(() => {
-    currentGuess
     return [
       [
         ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
@@ -81,7 +80,9 @@ export const Keyboard = ({
 
   useEffect(() => {
     const listener = (e: KeyboardEvent) => {
-      if (e.code === 'Enter') {
+      if (currentGuess === 'TROLL') {
+        onEnter()
+      } else if (e.code === 'Enter') {
         onEnter()
       } else if (e.code === 'Backspace') {
         onDelete()
