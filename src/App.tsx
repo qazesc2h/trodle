@@ -41,7 +41,6 @@ import { AlertContainer } from './components/alerts/AlertContainer'
 import { useAlert } from './context/AlertContext'
 import { Navbar } from './components/navbar/Navbar'
 import { isInAppBrowser } from './lib/browser'
-import { start } from 'repl'
 import AnimatedBg from 'react-animated-bg'
 
 function App() {

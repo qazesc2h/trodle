@@ -28,6 +28,7 @@ export const Keyboard = ({
 }: Props) => {
   const charStatuses = getStatuses(solution, guesses)
   const keyLayout = useMemo(() => {
+    currentGuess
     return [
       [
         ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
