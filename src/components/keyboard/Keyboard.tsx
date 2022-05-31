@@ -80,9 +80,7 @@ export const Keyboard = ({
 
   useEffect(() => {
     const listener = (e: KeyboardEvent) => {
-      if (currentGuess === 'TROLL') {
-        onEnter()
-      } else if (e.code === 'Enter') {
+      if (e.code === 'Enter') {
         onEnter()
       } else if (e.code === 'Backspace') {
         onDelete()
