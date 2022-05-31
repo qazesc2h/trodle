@@ -42,7 +42,7 @@ export const Key = ({
         status === 'correct' && !isHighContrast,
       'bg-yellow-500 hover:bg-yellow-600 active:bg-yellow-700 text-white':
         status === 'present' && !isHighContrast,
-      'text-transparent': isTransparent,
+      'text-transparent dark:text-transparent': isTransparent,
     }
   )
 
