@@ -10,8 +10,31 @@ export const InfoModal = ({ isOpen, handleClose }: Props) => {
   return (
     <BaseModal title="How to play" isOpen={isOpen} handleClose={handleClose}>
       <p className="text-sm text-gray-500 dark:text-gray-300">
-        Guess the word in 6 tries. After each guess, the color of the tiles will
-        change to show how close your guess was to the word.
+        Guess the word in 6 tries.{' '}
+        <b>
+          <u>A</u>
+        </b>
+        fter each guess, the color of the tiles will cha
+        <b>
+          <u>n</u>
+        </b>
+        ge to{' '}
+        <b>
+          <u>s</u>
+        </b>
+        how ho
+        <b>
+          <u>w</u>
+        </b>{' '}
+        clos
+        <b>
+          <u>e</u>
+        </b>{' '}
+        you
+        <b>
+          <u>r</u>
+        </b>{' '}
+        guess was to the word.
       </p>
 
       <div className="flex justify-center mb-1 mt-4">
@@ -43,7 +66,11 @@ export const InfoModal = ({ isOpen, handleClose }: Props) => {
         <Cell value="T" />
       </div>
       <p className="text-sm text-gray-500 dark:text-gray-300">
-        The letter L is in the word but in the wrong spot.
+        The letter L{' '}
+        <b>
+          <u>is</u>
+        </b>{' '}
+        in the word but in the wrong spot.
       </p>
 
       <div className="flex justify-center mb-1 mt-4">
@@ -58,8 +85,26 @@ export const InfoModal = ({ isOpen, handleClose }: Props) => {
       </p>
 
       <p className="mt-6 italic text-sm text-gray-500 dark:text-gray-300">
-        This is an open source version of the word guessing game we all know and
-        love -{' '}
+        <b>
+          <u>T</u>
+        </b>
+        his is an open sou
+        <b>
+          <u>r</u>
+        </b>
+        ce versi
+        <b>
+          <u>o</u>
+        </b>
+        n of the word guessing game we a
+        <b>
+          <u>l</u>
+        </b>
+        l know and
+        <b>
+          <u>l</u>
+        </b>
+        ove -{' '}
         <a
           href="https://github.com/cwackerfuss/react-wordle"
           className="underline font-bold"
