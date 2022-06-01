@@ -165,6 +165,7 @@ function App() {
       showSuccessAlert(winMessage, {
         delayMs,
         onClose: () => setIsStatsModalOpen(true),
+        durationMs: 200,
       })
     }
 
