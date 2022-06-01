@@ -100,7 +100,7 @@ export const InfoModal = ({ isOpen, handleClose }: Props) => {
         <b>
           <u>l</u>
         </b>
-        l know and
+        l know and{' '}
         <b>
           <u>l</u>
         </b>
