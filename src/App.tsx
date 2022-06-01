@@ -160,7 +160,7 @@ function App() {
     if (isGameWon) {
       const winMessage =
         WIN_MESSAGES[Math.floor(Math.random() * WIN_MESSAGES.length)]
-      const delayMs = REVEAL_TIME_MS * solution.length
+      const delayMs = REVEAL_TIME_MS * 0
 
       showSuccessAlert(winMessage, {
         delayMs,
@@ -171,7 +171,7 @@ function App() {
     if (isGameLost) {
       setTimeout(() => {
         setIsStatsModalOpen(true)
-      }, (solution.length + 1) * REVEAL_TIME_MS)
+      }, 0 * REVEAL_TIME_MS)
     }
   }, [isGameWon, isGameLost, showSuccessAlert])
 
